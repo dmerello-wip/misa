@@ -1,19 +1,21 @@
 import Head from 'next/head'
 import {getPageFromSlug} from '@/lib/api-pages.js';
-import Gallery from '@/components/Gallery.js';
+import Scroller from '@/components/Scroller';
+import Test from '@/components/Test';
 
 
 export default function Home({title, description, works}) {
   return (
     <div>
       <Head>
-        <title>{title}</title>
-        <meta name="title" content={title}/>
-        <meta name="description" content={description}/>
+        <title>test</title>
+        <meta name="description" content="to be implemented"/>
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <main>
-          <Gallery contents={works}/>
+        <Scroller scrollType="horizontal">
+          <Test works={works}/>
+        </Scroller>
       </main>
     </div>
   )
