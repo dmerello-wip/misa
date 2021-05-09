@@ -1,0 +1,130 @@
+/* FONT WEIGHTS*/
+$font-bold: 700;
+$font-semi-bold: 600;
+$font-regular: 400;
+$font-light: 300;
+$font-thin: 100;
+$font-family-base: 'Montserrat',sans-serif;
+
+html {
+  font-family: $font-family-base;
+  font-size: 15px;
+  @include responsiveTo('md'){
+    font-size: 13px;
+  }
+}
+
+em {
+  font-weight: $font-bold;
+  font-style: normal;
+  color: white;
+}
+
+a {
+  color: getColor('primary');
+  &:hover {
+    color: getColor('text');
+  }
+}
+
+hr {
+  width: rem(250);
+  max-width: 100%;
+  border:0;
+  border-top: 1px solid getColor('secondary');
+}
+
+.highlighted {
+  color: getColor('secondary');
+  text-transform: uppercase;
+  font-weight: $font-semi-bold;
+}
+
+/* -------- CARD DATA-MODEL STANDARDS -------- */
+
+
+/* -------- OVERRIDE BROWSER DEFAULTS -------- */
+/* --------   for heading tags and p  -------- */
+
+
+.pretitle, .title, .subtitle, .wrapper-title {
+  margin-block-start: 0em;
+  margin-block-end: 0em;
+  font-weight: normal;
+  p {
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+  }
+}
+
+
+/* -------- CARD DATA-MODEL STANDARDS -------- */
+
+
+.pretitle {
+  //font-size: 0.9rem;
+  font-size: rem(16);
+  text-transform: uppercase;
+  line-height: 1em;
+  padding: 0.2rem 0;
+  font-weight: $font-semi-bold;
+}
+
+.title {
+  font-size: rem(40);
+  line-height: 1em;
+  padding: 0.4rem 0;
+  font-weight: $font-bold;
+  &--large {
+    font-size: rem(43);
+  }
+}
+
+
+.subtitle {
+  //font-size: 1.1rem;
+  font-size:rem(16);
+  line-height: 1em;
+  padding: 0.2rem 0;
+  font-weight: $font-bold;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.4rem;
+  padding: 1.6rem 0;
+}
+/* -------- TYPE UTILITIES -------- */
+
+.note {
+  font-size: 0.8rem;
+}
+
+table.styled-table {
+  th {
+    font-weight: $font-semi-bold;
+  }
+  th, td {
+    padding: 1em;
+  }
+}
+
+@include responsiveTo('md') {
+  table.styled-table {
+    display: block;
+    th, td {
+      display: block;
+    }
+    th {
+      background: #efefef;
+    }
+  }
+}
+
+@include responsiveFrom('md') {
+  table.styled-table {
+    tr:nth-child(even) {
+      background: #efefef;
+    }
+  }
+}

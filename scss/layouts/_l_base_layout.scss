@@ -1,0 +1,17 @@
+html, body {
+  height:100%;
+}
+body {
+  margin:0;
+  color: getColor('text');
+  position: relative;
+  font-family: $font-family-base;
+  overflow: hidden;
+}
+
+.main {
+}
+
+.container {
+  @include mainContainer();
+}

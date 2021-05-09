@@ -1,0 +1,34 @@
+.c-fieldwrapper {
+  position: relative;
+  padding: 0.5rem;
+  &__error {
+    font-size: 0.6em;
+    color: getColor('error');
+    padding: 0.5em 1em;
+    text-transform: uppercase;
+    font-weight: $font-semi-bold;
+    position: absolute;
+    top: 1.5em;
+    right: 0;
+    background: getColor('text');
+    border-radius: $border-radius;
+    &::after {
+      $arrowSize: 0.8em;
+      position: absolute;
+      bottom:-$arrowSize/2;
+      right: 2em;
+      width: $arrowSize;
+      height: $arrowSize;
+      transform: rotate(45deg);
+      content: '';
+      background: getColor('text');
+    }
+  }
+  label {
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    padding-bottom: 1em;
+    display: block;
+    font-weight: $font-semi-bold;
+  }
+}

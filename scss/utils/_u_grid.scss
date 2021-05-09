@@ -1,0 +1,78 @@
+//VIEWPORTS
+$viewports: (
+        xxxl:(
+                base:1600
+        ),
+        xxl:(
+                base: 1400
+        ),
+        xl: (
+                base: 1340
+        ),
+        lg: (
+                base: 1024
+        ),
+        md: (
+                base: 768
+        ),
+        sm: (
+                base: 320
+        )
+);
+
+@mixin responsiveTo($viewportRef) {
+  $currBreak: map_get($viewports, $viewportRef);
+  $selectedViewport: map-get($currBreak, 'base');
+  $viewportTotal: $selectedViewport - 1;
+  @media screen and (max-width: $viewportTotal*1px) {
+    @content;
+  }
+}
+
+@mixin responsiveFrom($viewportRef) {
+  $currBreak: map_get($viewports, $viewportRef);
+  $selectedViewport: map-get($currBreak, 'base');
+  $viewportTotal: $selectedViewport;
+  @media screen and (min-width: $viewportTotal*1px) {
+    @content;
+  }
+}
+
+@mixin mainContainer() {
+  $currBreak: map_get($viewports, 'xxl');
+  $maxWidth: map-get($map: $currBreak, $key: 'base');
+  width: calc(100% - (var(--main-container-pad-x) * 2px));
+  max-width: $maxWidth * 1px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin grid( $cols:12, $gap: var(--grid-gap) ) {
+  display: grid;
+  grid-template-columns: repeat($cols, 1fr);
+  gap: calc( #{$gap} * 1px );
+}
+
+
+:root {
+  --grid-gap: 20;
+}
+
+@include responsiveTo('lg') {
+  :root {
+    --main-container-pad-x: 20;
+  }
+}
+@include responsiveFrom('lg') {
+  :root {
+    --grid-gap: 30;
+    --main-container-pad-x: 100;
+  }
+}
+@include responsiveFrom('xxl') {
+  :root {
+    --main-container-pad-x: 120;
+  }
+}
+$mainContainerPadX: calc(var(--main-container-pad-x) * 1px);
+$mainContainerPadY: calc(var(--main-container-pad-x) * 0.5px);

@@ -1,0 +1,12 @@
+.out-view, .in-view {
+    transition: all 1s ease 0.2s;
+}
+
+.out-view {
+    opacity: 0;
+    transform: translateY(1rem);
+}
+.in-view {
+    opacity: 1;
+    transform: translateY(0) ;
+}

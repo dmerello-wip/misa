@@ -1,0 +1,49 @@
+/*
+<div class="c-options">
+  <label>
+    <input type="checkbox" class="c-option"/>
+  </label>
+</div>
+*/
+
+.c-options {
+  position: relative;
+  padding: 0.5rem;
+  display: inline-flex;
+  > * {
+    padding-right: 1rem;
+  }
+  .c-fieldwrapper__error {
+    top: -1.5em;
+  }
+}
+
+.c-option {
+  cursor: pointer;
+  box-sizing: border-box;
+  line-height: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  flex-shrink: 0;
+  color: currentColor;
+  position: relative;
+  width: 3em;
+  height: 3em;
+  background-origin: border-box;
+  vertical-align: middle;
+  user-select: none;
+  border: 2px solid currentColor;
+  border-radius: 2px;
+  display: inline-block;
+  margin-right: 1em;
+  &:checked {
+    background-color: transparent;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='currentColor' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M12.711 5.285a.996.996 0 00-1.301-.08l-.093.08-4.423 4.366-2.21-2.183a.995.995 0 00-1.395 0 .965.965 0 00-.082 1.285l.082.092 2.908 2.872c.142.14.317.228.5.265l.14.018h.116l.115-.013a.987.987 0 00.43-.19l.094-.08 5.12-5.055a.965.965 0 000-1.377z'/%3e%3c/svg%3e");
+  }
+  &:focus {
+    outline: none;
+  }
+}

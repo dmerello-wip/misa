@@ -1,0 +1,50 @@
+@import "./c_fieldwrapper";
+@import "./c_field";
+@import "./c_options";
+@import "./c_select";
+
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='password'],
+input[type='number']{
+  @extend %c-field;
+}
+textarea {
+  @extend %c-field;
+  padding: 1rem;
+  height: rem(100);
+}
+
+/* -----------------  required utilities ----------------- */
+.required-info {
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  $rowWidth: 3rem;
+  $rowDistance: 1rem;
+  .required-sign {
+    padding-right: $rowDistance;
+    opacity: 1;
+  }
+  &__text {
+    position: relative;
+    padding-left: $rowDistance + $rowWidth;
+    &::before {
+      position: absolute;
+      top:50%;
+      left: 0;
+      border: 1px solid getColor('lightgray');
+      content: '';
+      width: $rowWidth;
+    }
+  }
+}
+.required-sign {
+  font-size: rem(16);
+  color: getColor('secondary');
+  opacity: 0;
+}
+

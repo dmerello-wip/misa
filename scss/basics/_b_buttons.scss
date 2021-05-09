@@ -1,0 +1,114 @@
+a{
+    text-decoration: none;
+}
+
+%btn{
+    position: relative;
+    --btn-border-color: transparent;
+    --btn-text-color: currentColor;
+    padding: rem(10) rem(22);
+    font-size: 1rem;
+    font-weight: $font-semi-bold;
+    letter-spacing: 1px;
+    //display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: rem(150);
+    min-height: rem(40);
+    text-align: center;
+    cursor: pointer;
+    user-select: none;
+    line-height: 1;
+    transition: all 0.2s ease-in-out;
+    background-color: transparent;
+    color: var(--btn-text-color) ;
+    border: 1px solid transparent;
+    outline: none;
+    border-radius: $border-radius;
+    &:after {
+        position: absolute;
+        transition: all 0.25s ease-out;
+        top: 50%; left: 50%; transform: translate(-50%, -50%);
+        width: 0; height: calc(100% - 0.3em);
+        border-radius: var(--border-radius) ;
+        content: '';
+
+    }
+    &:hover{
+        color: var(--btn-text-color);
+    }
+    &.medium{
+        font-size: rem(18);
+        min-width: rem(180);
+    }
+    &.large{
+        font-size: rem(20);
+        min-height: rem(50);
+        min-width: rem(200);
+    }
+    &.small{
+        font-size: rem(12);
+        min-width: rem(120);
+    }
+    &.wide {
+        display: flex;
+        width: 100%;
+    }
+    &.stroked{
+        background-color: transparent;
+        border-color: var(--btn-border-color);
+        color: var(--btn-border-color);
+        &:hover{
+            filter:none;
+            color: var(--btn-text-color);
+            background-color: var(--btn-border-color);
+        }
+    }
+}
+.btn-primary{
+    @extend %btn;
+    --btn-border-color: #{getColor('primary')};
+    --btn-text-color: #{getColor('inverted')};
+    background-color: getColor('primary');
+}
+.btn-secondary{
+    @extend %btn;
+    --btn-border-color: #{getColor('secondary')};
+    --btn-text-color: #{getColor('inverted')};
+    background-color: getColor('secondary');
+}
+
+.btn-link {
+    @extend %btn;
+    background: transparent;
+    border: 0px;
+    color: getColor('primary');
+    &:after {display: none}
+    box-shadow: none;
+}
+
+.btn-withicon {
+    > span {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .wip-icon {
+            margin-right:1em;
+        }
+    }
+}
+
+.arrow-link {
+    color: currentColor;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    .icon-arrow {
+        margin-right: rem(20);
+        display: block;
+        line-height: 1;
+        width: rem(25);
+    }
+}
+
