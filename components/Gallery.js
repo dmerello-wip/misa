@@ -1,24 +1,21 @@
-import {useRef} from 'react';
 import {Canvas} from "react-three-fiber";
-import * as THREE from 'three';
 import Work from '@/components/Work';
 import Camera from '@/components/Camera';
 
 const Gallery = ({contents}) => {
 
-  const cameraRef = useRef();
-  const radius = 10;
+  const radius = 12;
 
   const renderWorks = () => {
-    let baseDegrees = 360 / contents.length;
+    let baseDegrees = (2*Math.PI) / contents.length;
     return contents.map((el, i) => {
-      let x = radius * Math.sin(i * baseDegrees);
-      let z = radius * Math.cos(i * baseDegrees);
-      //TODO: calculate correct rotation:
-      let rot = THREE.Math.degToRad(baseDegrees * i);
+      let x = radius * Math.cos(i * baseDegrees);
+      let z = radius * Math.sin(i * baseDegrees);
+      let rot = - (baseDegrees*i + Math.PI/2);
       return <Work
         key={`work-${i}`}
         picture={el.picture}
+        title={el.title}
         position={[x, 0, z]}
         rotation={[0, rot, 0]}
       />;
@@ -33,7 +30,7 @@ const Gallery = ({contents}) => {
         <ambientLight intensity={0.2}/>
         <pointLight intensity={0.1} position={[-3, -4, -1]}/>
         <pointLight intensity={0.1} position={[3, -4, 1]}/>
-        <Camera position={[0, 0, 20]}/>
+        <Camera position={[0, 0, 0]}/>
       </Canvas>
     </div>
   )

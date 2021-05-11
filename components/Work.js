@@ -1,10 +1,11 @@
 import {useRef, useState, useMemo} from 'react';
+import {Html} from '@react-three/drei';
 import * as THREE from 'three';
 
-const Work = ({picture, position, rotation}) => {
+const Work = ({picture, title, position, rotation}) => {
 
-  const horizontalFormatBaseWidth = 3;
-  const verticalFormatBaseWidth = 1.5;
+  const horizontalFormatBaseWidth = 1.5;
+  const verticalFormatBaseWidth = 1;
   const mesh = useRef();
   const [size, setSize] = useState([1, 1]);
 
@@ -20,20 +21,23 @@ const Work = ({picture, position, rotation}) => {
   }), [picture]);
 
   return (
-    <>
-    <mesh
-      ref={mesh}
+    <group
       position={position}
-      rotation={rotation}
-    >
-      <planeBufferGeometry attach="geometry" args={size}/>
-      <meshBasicMaterial
-        attach="material"
-        map={texture}
-        transparent
-      />
-    </mesh>
-    </>
+      rotation={rotation}>
+      <Html transform={true} position={[0,-1.5,0]}>
+        <div className="work__title">{title}</div>
+      </Html>
+      <mesh
+        ref={mesh}
+      >
+        <planeBufferGeometry attach="geometry" args={size} />
+        <meshBasicMaterial
+          map={texture}
+          transparent
+          side={THREE.DoubleSide}
+        />
+      </mesh>
+    </group>
   );
 };
 
