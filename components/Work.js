@@ -1,5 +1,5 @@
 import {useRef, useState, useMemo} from 'react';
-import {Html, Box} from '@react-three/drei';
+import {Html, Plane} from '@react-three/drei';
 import * as THREE from 'three';
 
 const Work = ({picture, title, position, rotation}) => {
