@@ -1,5 +1,5 @@
 import {useRef, useState, useMemo} from 'react';
-import {Html} from '@react-three/drei';
+import {Html, Box} from '@react-three/drei';
 import * as THREE from 'three';
 
 const Work = ({picture, title, position, rotation}) => {
@@ -20,23 +20,19 @@ const Work = ({picture, title, position, rotation}) => {
     return false;
   }), [picture]);
 
+
   return (
-    <group
-      position={position}
-      rotation={rotation}>
+    <group position={position} rotation={rotation} castShadow
+    >
       <Html transform={true} position={[0,-1.5,0]}>
         <div className="work__title">{title}</div>
       </Html>
-      <mesh
-        ref={mesh}
-      >
-        <planeBufferGeometry attach="geometry" args={size} />
-        <meshBasicMaterial
+      <Plane ref={mesh} castShadow args={size} >
+        <meshPhongMaterial
           map={texture}
-          transparent
           side={THREE.DoubleSide}
         />
-      </mesh>
+      </Plane>
     </group>
   );
 };

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import {getPageFromSlug} from '@/lib/api-pages.js';
-import Gallery from '@/components/Gallery.js';
+import Stage from '@/components/Stage.js';
 
 
 export default function Home({title, description, works}) {
@@ -13,7 +13,7 @@ export default function Home({title, description, works}) {
         <link rel="icon" href="/favicon.ico"/>
       </Head>
       <main>
-          <Gallery contents={works}/>
+          <Stage contents={works}/>
       </main>
     </div>
   )
