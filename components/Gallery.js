@@ -5,7 +5,7 @@ import NormalizeWheel from 'normalize-wheel';
 
 const Gallery = ({contents}) => {
 
-  const radius = 12;
+  const radius = 10;
   const gallery = useRef();
 
   // events status
@@ -86,9 +86,9 @@ const Gallery = ({contents}) => {
       return <Work
         key={`work-${i}`}
         picture={el.picture}
-        title={el.title}
         position={[x, 0, z]}
         rotation={[0, rot, 0]}
+        id={el.id}
       />;
     });
   };

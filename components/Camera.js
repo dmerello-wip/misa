@@ -7,12 +7,12 @@ const Camera = ({position}) => {
 
   return (
     <>
-    {/*<PerspectiveCamera*/}
-      {/*ref={myCamera}*/}
-      {/*position={position}*/}
-      {/*makeDefault={true}*/}
-    {/*/>*/}
-    <OrbitControls camera={myCamera.current}/>
+    <PerspectiveCamera
+      ref={myCamera}
+      position={position}
+      makeDefault={true}
+    />
+    {/*<OrbitControls camera={myCamera.current}/>*/}
     </>
   );
 };
