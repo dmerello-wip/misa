@@ -5,7 +5,7 @@ import NormalizeWheel from 'normalize-wheel';
 
 const Gallery = ({contents}) => {
 
-  const radius = 10;
+  const radius = 12;
   const gallery = useRef();
 
   // events status
