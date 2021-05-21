@@ -7,7 +7,7 @@ const Camera = ({position}) => {
 
   return (
     <>
-    <PerspectiveCamera
+    <PerspectiveCamera castShadow
       ref={myCamera}
       position={position}
       makeDefault={true}

@@ -6,6 +6,7 @@ import Floor from '@/components/Floor';
 const Stage = ({contents}) => {
 
   const ambientColor = '#000';
+  const cameraPosition = [0, 1, 15];
 
   return (
     <div className="stage">
@@ -15,8 +16,8 @@ const Stage = ({contents}) => {
         <ambientLight castShadow intensity={1}/>
         <spotLight intensity={3} position={[2, 5, 15]} angle={0.4} penumbra={1} castShadow />
         <spotLight intensity={3} position={[-2, 5, 15]} angle={0.4} penumbra={1} castShadow />
-        <Gallery contents={contents}/>
-        <Camera position={[0, 1, 15]}/>
+        <Gallery contents={contents} cameraPosition={cameraPosition}/>
+        <Camera position={cameraPosition}/>
         <Floor color={ambientColor}/>
       </Canvas>
     </div>

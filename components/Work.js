@@ -1,8 +1,9 @@
-import {useRef, useState, useMemo} from 'react';
-import {Box} from '@react-three/drei';
+import {useRef, useState, useMemo, useEffect} from 'react';
+import {Box, Html} from '@react-three/drei';
+import {useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Work = ({picture, position, rotation, id}) => {
+const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
 
   const baseSize = [1, 1, 0.02];
 
@@ -10,8 +11,8 @@ const Work = ({picture, position, rotation, id}) => {
   const verticalFormatBaseWidth = 1;
   const workMesh = useRef();
   const [size, setSize] = useState(baseSize);
-
-
+  const cameraVector3 = new THREE.Vector3(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
+  const absolutePositionInWorld= new THREE.Vector3();
 
   // TEXTURE: load picture as a texture and set proportions for horiz / vert
   const texture = useMemo(() => new THREE.TextureLoader().load(picture, (txtr) => {
@@ -24,23 +25,26 @@ const Work = ({picture, position, rotation, id}) => {
     return false;
   }), [picture]);
 
+  useFrame(()=>{
+      if(id = 1) {
+        workMesh.current.getWorldPosition(absolutePositionInWorld);
+        if(absolutePositionInWorld) {
+          document.querySelector('body').dataset.distance = Math.ceil(getDistance(absolutePositionInWorld, cameraVector3));
+        }
+      }
+  });
 
-  // useFrame((state)=>{
-  //     if(id = 1) {
-  //       let cameraPosition = new THREE.Vector3(0, 1, 15); // <- todo: get it from state or drilling props
-  //       document.querySelector('body').dataset.test = getDistance(workMesh.current.position, cameraPosition);
-  //     }
-  // });
-  //
-  //
-  // const getDistance = (from, to) => {
-  // //UHM, always the same distance.... studia cane
-  //   return from.distanceTo(to);
-  // };
+  const getDistance = (from, to) => {
+  //UHM, always the same distance.... studia cane
+    return from.distanceTo(to);
+  };
 
 
   return (
       <Box position={position} rotation={rotation} castShadow ref={workMesh} args={size} >
+        <Html transform>
+        <h2>{title}</h2>
+        </Html>
         <meshPhongMaterial
           map={texture}
           transparent={true}

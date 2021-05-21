@@ -1,9 +1,10 @@
 import {useRef, useEffect} from "react";
 import Work from '@/components/Work';
-import useRaf from '../hooks/useRaf';
+// import useRaf from '../hooks/useRaf';
+import {useFrame} from '@react-three/fiber';
 import NormalizeWheel from 'normalize-wheel';
 
-const Gallery = ({contents}) => {
+const Gallery = ({contents, cameraPosition}) => {
 
   const radius = 12;
   const gallery = useRef();
@@ -27,7 +28,7 @@ const Gallery = ({contents}) => {
   /* request animation frame using ref rotation         */
   /* -------------------------------------------------- */
 
-  useRaf((delta)=>{
+  useFrame(()=>{
     // set the new rotationY:
     rotationY.current -= decellerationFactor * speed.current;
 
@@ -86,9 +87,11 @@ const Gallery = ({contents}) => {
       return <Work
         key={`work-${i}`}
         picture={el.picture}
+        title={el.title}
         position={[x, 0, z]}
         rotation={[0, rot, 0]}
         id={el.id}
+        cameraPosition={cameraPosition}
       />;
     });
   };
