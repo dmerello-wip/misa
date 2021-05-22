@@ -7,7 +7,7 @@ export default function Floor({color}) {
   return (
     <Plane
       receiveShadow
-      position={[0,-1,0]}
+      position={[0,0,0]}
       rotation={[-Math.PI/2,0,0]}
       args={[1000, 1000]}
       side={THREE.DoubleSide}

@@ -1,3 +1,4 @@
+import {Suspense} from "react";
 import {Canvas} from "@react-three/fiber";
 import {Box} from "@react-three/drei";
 import Gallery from '@/components/Gallery';
@@ -12,21 +13,20 @@ const Stage = ({contents}) => {
   return (
     <div className="stage">
       <Canvas shadows={true} shadowMap>
-        <color attach="background" args={ambientColor} />
-        <fog attach="fog" args={[ambientColor, 0, 30]} />
+        <color attach="background" args={ambientColor}/>
+        <fog attach="fog" args={[ambientColor, 0, 28]}/>
         <ambientLight castShadow intensity={1}/>
-        <spotLight intensity={0.5} position={[-2, 5, 10]} angle={2} penumbra={1} castShadow />
-        <spotLight intensity={1} position={[2, 0, 10]} angle={2} penumbra={1} castShadow />
-        <spotLight intensity={2} position={[0, 30, 30]} angle={2} penumbra={1} castShadow />
-        <Gallery contents={contents} cameraPosition={cameraPosition}/>
+        <spotLight intensity={0.5} position={[-2, 20, 30]} angle={2} penumbra={1} castShadow/>
+        <spotLight intensity={1} position={[0, 4, 6]} angle={2} penumbra={1} castShadow/>
         <Camera position={cameraPosition}/>
-        <Box args={[1,1,1]} rotation={[0,10,0]} castShadow position={[0,0,0]}/>
         <Floor color={ambientColor}/>
+        <Suspense fallback={null}>
+          <Gallery contents={contents} cameraPosition={cameraPosition}/>
+        </Suspense>
       </Canvas>
     </div>
   )
 };
-
 
 export default Stage;
 

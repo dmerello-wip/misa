@@ -41,16 +41,18 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
 
 
   return (
-      <Box position={position} rotation={rotation} castShadow ref={workMesh} args={size} >
-        <Html transform>
-        <h2>{title}</h2>
-        </Html>
+    <group  position={position} rotation={rotation}>
+      {/*<Html transform>*/}
+      {/*<h2>{title}</h2>*/}
+      {/*</Html>*/}
+      <Box castShadow ref={workMesh} args={size} >
         <meshPhongMaterial
           map={texture}
           transparent={true}
           side={THREE.DoubleSide}
         />
       </Box>
+    </group>
   );
 };
 

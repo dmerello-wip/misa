@@ -1,10 +1,10 @@
 import {useRef, useEffect} from "react";
 import Work from '@/components/Work';
-// import useRaf from '../hooks/useRaf';
-import {useFrame} from '@react-three/fiber';
+import {useFrame, useLoader} from '@react-three/fiber';
 import NormalizeWheel from 'normalize-wheel';
 
 const Gallery = ({contents, cameraPosition}) => {
+
 
   const radius = 12;
   const gallery = useRef();
@@ -28,7 +28,7 @@ const Gallery = ({contents, cameraPosition}) => {
   /* request animation frame using ref rotation         */
   /* -------------------------------------------------- */
 
-  useFrame(()=>{
+  useFrame(() => {
     // set the new rotationY:
     rotationY.current -= decellerationFactor * speed.current;
 
@@ -79,11 +79,11 @@ const Gallery = ({contents, cameraPosition}) => {
   /* -------------------------------------------------- */
 
   const renderWorks = () => {
-    let baseDegrees = (2*Math.PI) / contents.length;
+    let baseDegrees = (2 * Math.PI) / contents.length;
     return contents.map((el, i) => {
       let x = radius * Math.cos(i * baseDegrees);
       let z = radius * Math.sin(i * baseDegrees);
-      let rot = - (baseDegrees*i + Math.PI/2);
+      let rot = -(baseDegrees * i + Math.PI / 2);
       return <Work
         key={`work-${i}`}
         picture={el.picture}
@@ -97,8 +97,8 @@ const Gallery = ({contents, cameraPosition}) => {
   };
 
   return (
-    <group ref={gallery} position={[0,1,0]} >
-      {renderWorks()}
+    <group ref={gallery} position={[0, 1, 0]}>
+        {renderWorks()}
     </group>
   )
 };
