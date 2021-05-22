@@ -12,7 +12,7 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
   const workMesh = useRef();
   const [size, setSize] = useState(baseSize);
   const cameraVector3 = new THREE.Vector3(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
-  const absolutePositionInWorld= new THREE.Vector3();
+  const absolutePositionInWorld = new THREE.Vector3();
 
   // TEXTURE: load picture as a texture and set proportions for horiz / vert
   const texture = useMemo(() => new THREE.TextureLoader().load(picture, (txtr) => {
@@ -25,27 +25,28 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
     return false;
   }), [picture]);
 
-  useFrame(()=>{
-      if(id = 1) {
-        workMesh.current.getWorldPosition(absolutePositionInWorld);
-        if(absolutePositionInWorld) {
-          document.querySelector('body').dataset.distance = Math.ceil(getDistance(absolutePositionInWorld, cameraVector3));
-        }
+  useFrame(() => {
+      workMesh.current.getWorldPosition(absolutePositionInWorld);
+      let distanceFromCamera = Math.ceil(getDistance(absolutePositionInWorld, cameraVector3));
+      document.querySelector('body').dataset.distance = distanceFromCamera;
+      // TODO: now id it's near the camera rotates: make it flip rom back to front
+      if (distanceFromCamera < 5) {
+        workMesh.current.rotation.y += parseFloat(`0.00${distanceFromCamera}`);
       }
   });
 
   const getDistance = (from, to) => {
-  //UHM, always the same distance.... studia cane
+    //UHM, always the same distance.... studia cane
     return from.distanceTo(to);
   };
 
 
   return (
-    <group  position={position} rotation={rotation}>
+    <group position={position} rotation={rotation}>
       {/*<Html transform>*/}
       {/*<h2>{title}</h2>*/}
       {/*</Html>*/}
-      <Box castShadow ref={workMesh} args={size} >
+      <Box castShadow ref={workMesh} args={size}>
         <meshPhongMaterial
           map={texture}
           transparent={true}

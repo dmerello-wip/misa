@@ -15,7 +15,7 @@ const Stage = ({contents}) => {
       <Canvas shadows={true} shadowMap>
         <color attach="background" args={ambientColor}/>
         <fog attach="fog" args={[ambientColor, 0, 28]}/>
-        <ambientLight castShadow intensity={1}/>
+        <ambientLight intensity={1}/>
         <spotLight intensity={0.5} position={[-2, 20, 30]} angle={2} penumbra={1} castShadow/>
         <spotLight intensity={1} position={[0, 4, 6]} angle={2} penumbra={1} castShadow/>
         <Camera position={cameraPosition}/>
