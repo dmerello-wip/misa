@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
 
-  const baseSize = [1, 1, 0.02];
+  const baseSize = [1, 1, 0.03];
 
   const horizontalFormatBaseWidth = 1.5;
   const verticalFormatBaseWidth = 1;
@@ -31,7 +31,7 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
       document.querySelector('body').dataset.distance = distanceFromCamera;
       // TODO: now id it's near the camera rotates: make it flip rom back to front
       if (distanceFromCamera < 5) {
-        workMesh.current.rotation.y += parseFloat(`0.00${distanceFromCamera}`);
+        // workMesh.current.rotation.y += parseFloat(`0.00${distanceFromCamera}`);
       }
   });
 
@@ -47,10 +47,17 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
       {/*<h2>{title}</h2>*/}
       {/*</Html>*/}
       <Box castShadow ref={workMesh} args={size}>
-        <meshPhongMaterial
+
+
+        <meshStandardMaterial attachArray="material" color="white"/>
+        <meshStandardMaterial attachArray="material" color="white"/>
+        <meshStandardMaterial attachArray="material" color="white"/>
+        <meshStandardMaterial attachArray="material" color="white"/>
+        <meshStandardMaterial attachArray="material" color="white"/>
+        <meshStandardMaterial
+          attachArray="material"
           map={texture}
           transparent={true}
-          side={THREE.DoubleSide}
         />
       </Box>
     </group>

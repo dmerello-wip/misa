@@ -16,8 +16,8 @@ const Stage = ({contents}) => {
         <color attach="background" args={ambientColor}/>
         <fog attach="fog" args={[ambientColor, 0, 28]}/>
         <ambientLight intensity={1}/>
-        <spotLight intensity={0.5} position={[-2, 20, 30]} angle={2} penumbra={1} castShadow/>
-        <spotLight intensity={1} position={[0, 4, 6]} angle={2} penumbra={1} castShadow/>
+        <spotLight intensity={0.6} position={[-2, 20, 30]} angle={2} penumbra={1} castShadow/>
+        <spotLight intensity={0.8} position={[0, 4, 7]} angle={2} penumbra={1} castShadow/>
         <Camera position={cameraPosition}/>
         <Floor color={ambientColor}/>
         <Suspense fallback={null}>
