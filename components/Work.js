@@ -5,7 +5,7 @@ import * as THREE from 'three';
 
 const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
 
-  const baseSize = [1, 1, 0.03];
+  const baseSize = [1, 1, 0.02];
 
   const horizontalFormatBaseWidth = 1.5;
   const verticalFormatBaseWidth = 1;
@@ -28,10 +28,9 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
   useFrame(() => {
       workMesh.current.getWorldPosition(absolutePositionInWorld);
       let distanceFromCamera = Math.ceil(getDistance(absolutePositionInWorld, cameraVector3));
-      document.querySelector('body').dataset.distance = distanceFromCamera;
       // TODO: now id it's near the camera rotates: make it flip rom back to front
       if (distanceFromCamera < 5) {
-        // workMesh.current.rotation.y += parseFloat(`0.00${distanceFromCamera}`);
+        workMesh.current.rotation.y += parseFloat(`0.0${distanceFromCamera}`);
       }
   });
 
@@ -53,12 +52,12 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
-        <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial
           attachArray="material"
           map={texture}
           transparent={true}
         />
+        <meshStandardMaterial attachArray="material" color="white"/>
       </Box>
     </group>
   );
