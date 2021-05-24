@@ -1,0 +1,39 @@
+.header {
+  position: fixed;
+  top:0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  z-index: $z-i-header;
+  padding: $siteComponentsMargin;
+  .header__logo {
+    width: 6rem;
+    svg {
+      fill: getColor('text');
+    }
+  }
+  .header__nav {
+    display: flex;
+    align-items: center;
+    &__item {
+      &:not(:last-child) {
+        padding-right:6rem;
+      }
+      a {
+        color: white;
+        text-transform: uppercase;
+        font-size: 0.85rem;
+      }
+      svg {
+        stroke: getColor('text');
+      }
+    }
+  }
+  .header__title {
+    position: fixed;
+    bottom: $siteComponentsMargin;
+    left: $siteComponentsMargin;
+    color: getColor('text');
+  }
+}

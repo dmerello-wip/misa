@@ -11,7 +11,6 @@ const Stage = ({contents}) => {
   const cameraPosition = [0, 1, 15];
 
   return (
-    <div className="stage">
       <Canvas shadows={true} shadowMap>
         <color attach="background" args={ambientColor}/>
         <fog attach="fog" args={[ambientColor, 0, 28]}/>
@@ -24,7 +23,6 @@ const Stage = ({contents}) => {
           <Gallery contents={contents} cameraPosition={cameraPosition}/>
         </Suspense>
       </Canvas>
-    </div>
   )
 };
 

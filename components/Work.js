@@ -3,7 +3,7 @@ import {Box, Html} from '@react-three/drei';
 import {useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
+const Work = ({position, initialRotation, picture, id}) => {
 
   const baseSize = [1, 1, 0.02];
 
@@ -35,10 +35,12 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
   });
 
   return (
-    <group position={position} rotation={rotation}>
-      {/*<Html transform>*/}
-      {/*<h2>{title}</h2>*/}
-      {/*</Html>*/}
+    <group position={position} rotation={initialRotation}>
+      <Html transform>
+        {/*<div className="work">*/}
+          {/*<div className="work__title">{id}</div>*/}
+        {/*</div>*/}
+      </Html>
       <Box castShadow ref={workMesh} args={size}>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>

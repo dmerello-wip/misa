@@ -89,7 +89,7 @@ const Gallery = ({contents, cameraPosition}) => {
         picture={el.picture}
         title={el.title}
         position={[x, 0, z]}
-        rotation={[0, rot, 0]}
+        initialRotation={[0, rot, 0]}
         id={el.id}
         cameraPosition={cameraPosition}
       />;
