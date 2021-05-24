@@ -11,8 +11,8 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
   const verticalFormatBaseWidth = 1;
   const workMesh = useRef();
   const [size, setSize] = useState(baseSize);
-  const cameraVector3 = new THREE.Vector3(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
   const absolutePositionInWorld = new THREE.Vector3();
+  const inViewRangeX = 3;
 
   // TEXTURE: load picture as a texture and set proportions for horiz / vert
   const texture = useMemo(() => new THREE.TextureLoader().load(picture, (txtr) => {
@@ -27,18 +27,15 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
 
   useFrame(() => {
       workMesh.current.getWorldPosition(absolutePositionInWorld);
-      let distanceFromCamera = Math.ceil(getDistance(absolutePositionInWorld, cameraVector3));
-      // TODO: now id it's near the camera rotates: make it flip rom back to front
-      if (distanceFromCamera < 5) {
-        workMesh.current.rotation.y += parseFloat(`0.0${distanceFromCamera}`);
+      // if obj is in frontal quadrant:
+      if(absolutePositionInWorld.z > 0) {
+        // if obj is centered in x (for an expected range):
+        if(-inViewRangeX < absolutePositionInWorld.x < inViewRangeX) {
+          // rotate obj y accordingly on how precisely it's centered in x
+          workMesh.current.rotation.y = THREE.Math.degToRad( ( 180 / inViewRangeX ) * ( inViewRangeX - absolutePositionInWorld.x ) );
+        }
       }
   });
-
-  const getDistance = (from, to) => {
-    //UHM, always the same distance.... studia cane
-    return from.distanceTo(to);
-  };
-
 
   return (
     <group position={position} rotation={rotation}>
@@ -46,8 +43,6 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
       {/*<h2>{title}</h2>*/}
       {/*</Html>*/}
       <Box castShadow ref={workMesh} args={size}>
-
-
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>

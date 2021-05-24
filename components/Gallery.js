@@ -22,7 +22,7 @@ const Gallery = ({contents, cameraPosition}) => {
 
   // behavioral constants
   const forceDecellerationFactor = 0.9;
-  const decellerationFactor = 0.0003;
+  const decellerationFactor = 0.0001;
 
   /* -------------------------------------------------- */
   /* request animation frame using ref rotation         */
