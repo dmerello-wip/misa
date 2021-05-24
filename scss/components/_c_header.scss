@@ -7,8 +7,9 @@
   justify-content: space-between;
   z-index: $z-i-header;
   padding: $siteComponentsMargin;
+  letter-spacing: 1px;
   .header__logo {
-    width: 6rem;
+    width: 7rem;
     svg {
       fill: getColor('text');
     }

@@ -1,5 +1,5 @@
 import {useRef, useState, useMemo, useEffect} from 'react';
-import {Box, Html} from '@react-three/drei';
+import {Box} from '@react-three/drei';
 import {useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -7,8 +7,8 @@ const Work = ({position, initialRotation, picture, id}) => {
 
   const baseSize = [1, 1, 0.02];
 
-  const horizontalFormatBaseWidth = 1.5;
-  const verticalFormatBaseWidth = 1;
+  const horizontalFormatBaseWidth = 1.8;
+  const verticalFormatBaseWidth = 1.1;
   const workMesh = useRef();
   const [size, setSize] = useState(baseSize);
   const absolutePositionInWorld = new THREE.Vector3();
@@ -34,13 +34,12 @@ const Work = ({position, initialRotation, picture, id}) => {
       }
   });
 
+  const handleClick = ()=>{
+    alert({id});
+  };
+
   return (
     <group position={position} rotation={initialRotation}>
-      <Html transform>
-        {/*<div className="work">*/}
-          {/*<div className="work__title">{id}</div>*/}
-        {/*</div>*/}
-      </Html>
       <Box castShadow ref={workMesh} args={size}>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
