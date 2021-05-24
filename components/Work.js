@@ -27,13 +27,10 @@ const Work = ({picture, position, rotation, id, cameraPosition, title}) => {
 
   useFrame(() => {
       workMesh.current.getWorldPosition(absolutePositionInWorld);
-      // if obj is in frontal quadrant:
-      if(absolutePositionInWorld.z > 0) {
-        // if obj is centered in x (for an expected range):
-        if(-inViewRangeX < absolutePositionInWorld.x < inViewRangeX) {
-          // rotate obj y accordingly on how precisely it's centered in x
-          workMesh.current.rotation.y = THREE.Math.degToRad( ( 180 / inViewRangeX ) * ( inViewRangeX - absolutePositionInWorld.x ) );
-        }
+      // if obj is in frontal quadrant and if obj is centered in x (for an expected range):
+      if(absolutePositionInWorld.z > 0 && -inViewRangeX < absolutePositionInWorld.x < inViewRangeX) {
+        // rotate obj y accordingly on how precisely it's centered in x
+        workMesh.current.rotation.y = THREE.Math.degToRad( ( 180 / inViewRangeX ) * ( inViewRangeX - absolutePositionInWorld.x ) );
       }
   });
 
