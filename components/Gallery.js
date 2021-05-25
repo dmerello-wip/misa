@@ -3,10 +3,9 @@ import Work from '@/components/Work';
 import {useFrame, useLoader} from '@react-three/fiber';
 import NormalizeWheel from 'normalize-wheel';
 
-const Gallery = ({contents, cameraPosition}) => {
+const Gallery = ({contents, radius}) => {
 
 
-  const radius = 12;
   const gallery = useRef();
 
   // events status
@@ -91,7 +90,6 @@ const Gallery = ({contents, cameraPosition}) => {
         position={[x, 0, z]}
         initialRotation={[0, rot, 0]}
         id={el.id}
-        cameraPosition={cameraPosition}
       />;
     });
   };
