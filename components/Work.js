@@ -1,5 +1,5 @@
 import {useRef, useState, useMemo} from 'react';
-import {Box} from '@react-three/drei';
+import {Box, Html} from '@react-three/drei';
 import {useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -10,9 +10,10 @@ const Work = ({position, initialRotation, picture, id}) => {
   const horizontalFormatBaseWidth = 1.8;
   const verticalFormatBaseWidth = 1.1;
   const workMesh = useRef();
+  const btnOpacityRef = useRef(0);
   const [size, setSize] = useState(baseSize);
   const absolutePositionInWorld = new THREE.Vector3();
-  const inViewRangeX = 3;
+  const inViewRangeX = 2;
 
   // TEXTURE: load picture as a texture and set proportions for horiz / vert
   const texture = useMemo(() => new THREE.TextureLoader().load(picture, (txtr) => {
@@ -28,15 +29,21 @@ const Work = ({position, initialRotation, picture, id}) => {
   useFrame(() => {
       workMesh.current.getWorldPosition(absolutePositionInWorld);
       // if obj is in frontal quadrant and if obj is centered in x (for an expected range):
-      if(absolutePositionInWorld.z > 0 && -inViewRangeX < absolutePositionInWorld.x < inViewRangeX) {
+      if(absolutePositionInWorld.z > 0 && -inViewRangeX < absolutePositionInWorld.x && absolutePositionInWorld.x < inViewRangeX) {
         // rotate obj y accordingly on how precisely it's centered in x
         workMesh.current.rotation.y = THREE.Math.degToRad( ( 180 / inViewRangeX ) * ( inViewRangeX - absolutePositionInWorld.x ) );
+        // if (-inViewRangeX/2 < absolutePositionInWorld.x < inViewRangeX/2) {
+        //   btnOpacityRef.current = 1;
+        // }
       }
   });
 
 
   return (
     <group position={position} rotation={initialRotation}>
+      <Html>
+        <button style={{opacity:btnOpacityRef.current}}>{id}</button>
+      </Html>
       <Box castShadow ref={workMesh} args={size}>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
