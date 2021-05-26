@@ -3,16 +3,17 @@ import {Box, Html} from '@react-three/drei';
 import {useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Work = ({position, initialRotation, picture, id}) => {
+const Work = ({position, initialRotation, picture, id, title}) => {
 
   const baseSize = [1, 1, 0.02];
 
   const horizontalFormatBaseWidth = 1.8;
   const verticalFormatBaseWidth = 1.1;
   const workMesh = useRef();
-  const btnOpacityRef = useRef(0);
+  const [btnOpacity, setBtnOpacity] = useState(0);
   const [size, setSize] = useState(baseSize);
   const absolutePositionInWorld = new THREE.Vector3();
+  const absoluteRotationInWorld = new THREE.Quaternion();
   const inViewRangeX = 2;
 
   // TEXTURE: load picture as a texture and set proportions for horiz / vert
@@ -28,21 +29,28 @@ const Work = ({position, initialRotation, picture, id}) => {
 
   useFrame(() => {
       workMesh.current.getWorldPosition(absolutePositionInWorld);
+      workMesh.current.getWorldQuaternion(absoluteRotationInWorld);
       // if obj is in frontal quadrant and if obj is centered in x (for an expected range):
       if(absolutePositionInWorld.z > 0 && -inViewRangeX < absolutePositionInWorld.x && absolutePositionInWorld.x < inViewRangeX) {
         // rotate obj y accordingly on how precisely it's centered in x
         workMesh.current.rotation.y = THREE.Math.degToRad( ( 180 / inViewRangeX ) * ( inViewRangeX - absolutePositionInWorld.x ) );
-        // if (-inViewRangeX/2 < absolutePositionInWorld.x < inViewRangeX/2) {
-        //   btnOpacityRef.current = 1;
-        // }
+        // opacity as invert of distance of x from 0 -1
+        setBtnOpacity( - (Math.abs(absolutePositionInWorld.x) - 1) );
       }
   });
 
 
   return (
     <group position={position} rotation={initialRotation}>
-      <Html>
-        <button style={{opacity:btnOpacityRef.current}}>{id}</button>
+      <Html position={[0,-1,0]}>
+        <div className="work__content" style={{opacity:btnOpacity}}>
+          <div className="work__title">
+            {title}
+          </div>
+          <button className="work__cta btn-link">
+            show more
+          </button>
+        </div>
       </Html>
       <Box castShadow ref={workMesh} args={size}>
         <meshStandardMaterial attachArray="material" color="white"/>

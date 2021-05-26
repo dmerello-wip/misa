@@ -26,10 +26,10 @@ export default function header() {
         </div>
         <div className="header__nav__item">
           <Link href="/contact">
-            <IconContact/>
+            <div><IconContact/></div>
           </Link>
         </div>
     </nav>
-    < / div >
+    </div>
   )
 }

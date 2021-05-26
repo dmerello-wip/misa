@@ -97,18 +97,3 @@ a{
         }
     }
 }
-
-.arrow-link {
-    color: currentColor;
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-
-    .icon-arrow {
-        margin-right: rem(20);
-        display: block;
-        line-height: 1;
-        width: rem(25);
-    }
-}
-
