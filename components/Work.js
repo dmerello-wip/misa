@@ -44,12 +44,7 @@ const Work = ({position, initialRotation, picture, id, title}) => {
     <group position={position} rotation={initialRotation}>
       <Html position={[0,-1,0]}>
         <div className="work__content" style={{opacity:btnOpacity}}>
-          <div className="work__title">
             {title}
-          </div>
-          <button className="work__cta btn-link">
-            show more
-          </button>
         </div>
       </Html>
       <Box castShadow ref={workMesh} args={size}>
