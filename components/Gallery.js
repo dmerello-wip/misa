@@ -3,7 +3,7 @@ import Work from '@/components/Work';
 import {useFrame, useLoader} from '@react-three/fiber';
 import NormalizeWheel from 'normalize-wheel';
 
-const Gallery = ({contents, radius}) => {
+const Gallery = ({contents, radius, itemClick}) => {
 
 
   const gallery = useRef();
@@ -89,7 +89,8 @@ const Gallery = ({contents, radius}) => {
         title={el.title}
         position={[x, 0, z]}
         initialRotation={[0, rot, 0]}
-        id={el.id}
+        slug={el.slug}
+        clickHandler={itemClick}
       />;
     });
   };

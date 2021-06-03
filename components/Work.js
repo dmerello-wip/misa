@@ -3,7 +3,7 @@ import {Box, Html} from '@react-three/drei';
 import {useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
 
-const Work = ({position, initialRotation, picture, id, title}) => {
+const Work = ({position, initialRotation, picture, slug, title, clickHandler}) => {
 
   const baseSize = [1, 1, 0.02];
 
@@ -41,7 +41,10 @@ const Work = ({position, initialRotation, picture, id, title}) => {
 
 
   return (
-    <group position={position} rotation={initialRotation}>
+    <group
+      position={position}
+      rotation={initialRotation}
+      onPointerUp={()=>{clickHandler(slug)}}>
       <Html position={[0,-1,0]}>
         <div className="work__content" style={{opacity:btnOpacity}}>
             {title}

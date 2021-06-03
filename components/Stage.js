@@ -5,7 +5,7 @@ import Gallery from '@/components/Gallery';
 import Camera from '@/components/Camera';
 import Floor from '@/components/Floor';
 
-const Stage = ({contents}) => {
+const Stage = ({contents, itemClickHandler}) => {
 
   const ambientColor = '#111316';
   const radius = contents.length / 2.5;
@@ -24,7 +24,12 @@ const Stage = ({contents}) => {
         <spotLight intensity={0.8} position={[0, 4, 7]} angle={2} penumbra={1} castShadow/>
         <Floor color={ambientColor}/>
         <Suspense fallback={null}>
-          <Gallery contents={contents} cameraPosition={cameraPosition} radius={radius}/>
+          <Gallery
+            contents={contents}
+            cameraPosition={cameraPosition}
+            radius={radius}
+            itemClick = {itemClickHandler}
+          />
         </Suspense>
       </Canvas>
     </div>

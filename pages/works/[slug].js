@@ -29,7 +29,7 @@ export default function Work({title, picture, description}) {
 
 
 export async function getStaticPaths() {
-  // generate static paths of all deliveries on build
+  // generate static paths of all work pages on build
   const items = await getWorksSlugs();
   let paths = items.map((item) => `/works/${item}`);
   return {
