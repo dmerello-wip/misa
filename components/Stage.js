@@ -13,9 +13,10 @@ const Stage = ({contents}) => {
   const fogDistance = radius * 2.5;
 
   return (
+    <div className="stage">
       <Canvas shadows={true} shadowMap>
         <color attach="background" args={ambientColor}/>
-        <fog attach="fog" args={[ambientColor, 0, fogDistance]} />
+        <fog attach="fog" args={[ambientColor, 0, fogDistance]}/>
         <Camera position={cameraPosition}/>
         <ambientLight intensity={1}/>
         /* also spotlight could be managed with radius relation: */
@@ -26,6 +27,7 @@ const Stage = ({contents}) => {
           <Gallery contents={contents} cameraPosition={cameraPosition} radius={radius}/>
         </Suspense>
       </Canvas>
+    </div>
   )
 };
 

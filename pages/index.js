@@ -15,16 +15,14 @@ export default function Home({title, description, works}) {
       </Head>
       <main>
         <Header/>
-        <div className="stage">
-          <Stage contents={works}/>
-        </div>
+        <Stage contents={works}/>
       </main>
     </div>
   )
 }
 
 
-export async function getServerSideProps(context) {
+export async function getStaticProps(context) {
   const contents = await getPageFromSlug('home');
   return {
     props: {
