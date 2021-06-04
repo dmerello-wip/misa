@@ -6,7 +6,7 @@
   display: flex;
   justify-content: space-between;
   z-index: $z-i-header;
-  padding: $siteComponentsMargin;
+  padding: $siteMargin;
   letter-spacing: 1px;
   .header__logo {
     width: 7rem;
@@ -19,7 +19,7 @@
     align-items: center;
     &__item {
       &:not(:last-child) {
-        padding-right:6rem;
+        padding-right:$siteMargin;
       }
       a {
         color: white;
@@ -33,8 +33,11 @@
   }
   .header__title {
     position: fixed;
-    bottom: $siteComponentsMargin;
-    left: $siteComponentsMargin;
+    bottom: $siteMargin;
+    left: $siteMargin*2;
     color: getColor('text');
+    transform-origin: left ;
+    transform: rotate(-90deg);
+    text-transform: uppercase;
   }
 }

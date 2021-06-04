@@ -1,9 +1,16 @@
 import Head from 'next/head'
-import {getWorkFromSlug, getWorksSlugs} from '@/lib/api-pages.js';
-import Header from '@/components/Header.js';
-
+import {getWorkFromSlug, getWorksSlugs} from '@/lib/api-pages';
+import Header from '@/components/Header';
+import IconBack from '@/components/svg/IconBack';
+import { useRouter } from 'next/router';
 
 export default function Work({title, picture, description}) {
+  const router = useRouter();
+
+  const handleBack = (slug)=>{
+    router.push(`/`);
+  };
+
   return (
     <div>
       <Head>
@@ -15,12 +22,20 @@ export default function Work({title, picture, description}) {
       <main>
         <Header/>
         <div className="detail">
-          <div className="detail__title">
-            {title}
-          </div>
           <picture className="detail__picture">
             <img src={picture} alt={title}/>
           </picture>
+          <div className="detail__content">
+            <div className="detail__content__title">
+              {title}
+            </div>
+          </div>
+          <div className="detail__back">
+            <button className="btn-withicon" onClick={handleBack}>
+              <IconBack/>
+              <span>back to gallery</span>
+            </button>
+          </div>
         </div>
       </main>
     </div>

@@ -88,12 +88,12 @@ a{
 }
 
 .btn-withicon {
-    > span {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        .wip-icon {
-            margin-right:1em;
-        }
+    @extend %btn;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    svg {
+        width: 2rem;
+        margin-right: 1em;
     }
 }

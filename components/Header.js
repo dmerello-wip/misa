@@ -11,7 +11,7 @@ export default function header() {
         <Logo/>
       </div>
       <div className="header__title">
-        Facciamo prove di raf e three
+        Liliana Zaccheroni
       </div>
       <nav className="header__nav">
         <div className="header__nav__item">
