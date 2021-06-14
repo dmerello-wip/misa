@@ -1,14 +1,13 @@
-import {useRef} from "react";
+import {useRef, forwardRef} from "react";
 import {PerspectiveCamera, OrbitControls} from '@react-three/drei';
 
-const Camera = ({position}) => {
+const Camera = ({position}, ref) => {
 
-  const myCamera = useRef();
 
   return (
     <>
     <PerspectiveCamera castShadow
-      ref={myCamera}
+      ref={ref}
       position={position}
       makeDefault={true}
     />
@@ -17,5 +16,5 @@ const Camera = ({position}) => {
   );
 };
 
-export default Camera;
+export default forwardRef(Camera);
 
