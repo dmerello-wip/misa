@@ -1,4 +1,4 @@
-import {useRef, useState, useMemo} from 'react';
+import {useEffect, useRef, useState, useMemo} from 'react';
 import {Box, Html} from '@react-three/drei';
 import {useFrame} from '@react-three/fiber';
 import * as THREE from 'three';
@@ -12,6 +12,7 @@ const Work = ({position, initialRotation, picture, slug, title, clickHandler}) =
   const workMesh = useRef();
   const [btnOpacity, setBtnOpacity] = useState(0);
   const [size, setSize] = useState(baseSize);
+  const [hovered, setHovered] = useState(false);
   const absolutePositionInWorld = new THREE.Vector3();
   const absoluteRotationInWorld = new THREE.Quaternion();
   const inViewRangeX = 2;
@@ -27,6 +28,10 @@ const Work = ({position, initialRotation, picture, slug, title, clickHandler}) =
     return false;
   }), [picture]);
 
+  useEffect(()=>{
+    document.body.style.cursor =  (hovered) ? 'pointer' : 'inherit';
+  }, [hovered]);
+
   useFrame(() => {
       workMesh.current.getWorldPosition(absolutePositionInWorld);
       workMesh.current.getWorldQuaternion(absoluteRotationInWorld);
@@ -40,11 +45,15 @@ const Work = ({position, initialRotation, picture, slug, title, clickHandler}) =
   });
 
 
+
   return (
     <group
       position={position}
       rotation={initialRotation}
-      onPointerUp={()=>{clickHandler(slug)}}>
+      onPointerOver={() => setHovered(true)}
+      onPointerOut={() => setHovered(false)}
+      onPointerUp={()=>{clickHandler(slug)}}
+    >
       <Html position={[0,-1,0]}>
         <div className="work__content" style={{opacity:btnOpacity}}>
             {title}

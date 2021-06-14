@@ -2,22 +2,24 @@ import {useRef, useEffect} from "react";
 import Work from '@/components/Work';
 import {useFrame, useLoader} from '@react-three/fiber';
 import NormalizeWheel from 'normalize-wheel';
+import gsap, {TweenMax, Expo} from 'gsap';
 
 const Gallery = ({contents, radius, itemClick}) => {
 
 
   const gallery = useRef();
 
-  // events status
+  // events status (using refs to avoid re-rendering)
+  const interactionEnabled = useRef(false);
   const touchIsStarted = useRef(false);
   const touchStartPos = useRef();
+
+  // dom manipulation value
+  const rotationY = useRef(0);
 
   // scroll vars
   const speed = useRef(0);
   const direction = useRef('forward');
-
-  // dom manipulation value
-  const rotationY = useRef(0);
 
   // behavioral constants
   const forceDecellerationFactor = 0.9;
@@ -28,15 +30,17 @@ const Gallery = ({contents, radius, itemClick}) => {
   /* -------------------------------------------------- */
 
   useFrame(() => {
-    // set the new rotationY:
-    rotationY.current -= decellerationFactor * speed.current;
+    if (interactionEnabled) {
+      // set the new rotationY:
+      rotationY.current -= decellerationFactor * speed.current;
 
-    // move three accordingly
-    gallery.current.rotation.y = rotationY.current;
+      // move three accordingly
+      gallery.current.rotation.y = rotationY.current;
 
-    // decrement the force
-    direction.current = (speed.current > 0) ? 'forward' : 'back';
-    speed.current = (direction.current === 'forward') ? Math.floor(speed.current * forceDecellerationFactor) : Math.ceil(speed.current * forceDecellerationFactor);
+      // decrement the force
+      direction.current = (speed.current > 0) ? 'forward' : 'back';
+      speed.current = (direction.current === 'forward') ? Math.floor(speed.current * forceDecellerationFactor) : Math.ceil(speed.current * forceDecellerationFactor);
+    }
   });
 
   /* -------------------------------------------------- */
@@ -64,12 +68,25 @@ const Gallery = ({contents, radius, itemClick}) => {
     touchIsStarted.current = false;
   };
 
+  const initialAnimation = () => new Promise((resolve, reject) => {
+    let galleryChoords = { posY: gallery.current.position.y };
+    TweenMax.from(galleryChoords, 1, {
+      posY: -4,
+      ease: Expo.easeOut,
+      onUpdate: () => gallery.current.position.y = galleryChoords.posY,
+      onComplete: resolve
+    });
+  });
+
   useEffect(() => {
-    let scrollTgtElement = document.querySelector('.stage');
-    scrollTgtElement.addEventListener('mousewheel', onWheel);
-    scrollTgtElement.addEventListener('touchstart', onTouchStart);
-    scrollTgtElement.addEventListener('touchmove', onTouchMove);
-    scrollTgtElement.addEventListener('touchend', onTouchEnd);
+    initialAnimation().then(() => {
+      interactionEnabled.current = true;
+      let scrollTgtElement = document.querySelector('.stage');
+      scrollTgtElement.addEventListener('mousewheel', onWheel);
+      scrollTgtElement.addEventListener('touchstart', onTouchStart);
+      scrollTgtElement.addEventListener('touchmove', onTouchMove);
+      scrollTgtElement.addEventListener('touchend', onTouchEnd);
+    });
   }, []);
 
 
@@ -97,7 +114,7 @@ const Gallery = ({contents, radius, itemClick}) => {
 
   return (
     <group ref={gallery} position={[0, 1, 0]}>
-        {renderWorks()}
+      {renderWorks()}
     </group>
   )
 };
