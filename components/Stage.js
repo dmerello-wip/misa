@@ -16,7 +16,7 @@ const Stage = ({contents, itemClickHandler}) => {
 
   const ambientColor = '#000';
   const radius = contents.length / 2.5;
-  const cameraPosition = [0, 1, radius + 3];
+  const cameraPosition = [0, 2, radius + 6];
   const fogDistance = radius * 2.5;
 
   const goToWork = (slug) => {

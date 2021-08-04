@@ -14,8 +14,7 @@ const Work = ({position, initialRotation, picture, slug, title, clickHandler}) =
   const [size, setSize] = useState(baseSize);
   const [hovered, setHovered] = useState(false);
   const absolutePositionInWorld = new THREE.Vector3();
-  const absoluteRotationInWorld = new THREE.Quaternion();
-  const inViewRangeX = 2;
+  const inViewRangeX = 3;
 
   // TEXTURE: load picture as a texture and set proportions for horiz / vert
   const texture = useMemo(() => new THREE.TextureLoader().load(picture, (txtr) => {
@@ -34,12 +33,11 @@ const Work = ({position, initialRotation, picture, slug, title, clickHandler}) =
 
   useFrame(() => {
       workMesh.current.getWorldPosition(absolutePositionInWorld);
-      workMesh.current.getWorldQuaternion(absoluteRotationInWorld);
-      // if obj is in frontal quadrant and if obj is centered in x (for an expected range):
+      // // if obj is in frontal quadrant and if obj is centered in x (for an expected range):
       if(absolutePositionInWorld.z > 0 && -inViewRangeX < absolutePositionInWorld.x && absolutePositionInWorld.x < inViewRangeX) {
-        // rotate obj y accordingly on how precisely it's centered in x
-        workMesh.current.rotation.y = THREE.Math.degToRad( ( 180 / inViewRangeX ) * ( inViewRangeX - absolutePositionInWorld.x ) );
-        // opacity as invert of distance of x from 0 -1
+      //   // rotate obj y accordingly on how precisely it's centered in x
+      //   workMesh.current.rotation.y = THREE.Math.degToRad( ( 180 / inViewRangeX ) * ( inViewRangeX - absolutePositionInWorld.x ) );
+      //   // opacity as invert of distance of x from 0 -1
         setBtnOpacity( - (Math.abs(absolutePositionInWorld.x) - 1) );
       }
   });
@@ -49,7 +47,7 @@ const Work = ({position, initialRotation, picture, slug, title, clickHandler}) =
   return (
     <group
       position={position}
-      rotation={initialRotation}
+      rotation={[0,0, -Math.PI / 16]}
       onPointerOver={() => setHovered(true)}
       onPointerOut={() => setHovered(false)}
       onPointerUp={()=>{clickHandler(slug)}}
@@ -59,17 +57,13 @@ const Work = ({position, initialRotation, picture, slug, title, clickHandler}) =
             {title}
         </div>
       </Html>
-      <Box castShadow ref={workMesh} args={size}>
+      <Box castShadow ref={workMesh} args={size} rotation={initialRotation}>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
         <meshStandardMaterial attachArray="material" color="white"/>
-        <meshStandardMaterial
-          attachArray="material"
-          map={texture}
-          transparent={true}
-        />
         <meshStandardMaterial attachArray="material" color="white"/>
+        <meshStandardMaterial attachArray="material" map={texture} transparent={true}/>
       </Box>
     </group>
   );

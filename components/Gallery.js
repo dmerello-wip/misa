@@ -1,4 +1,4 @@
-import {useRef, useEffect} from "react";
+import {useRef, useState, useEffect} from "react";
 import Work from '@/components/Work';
 import {useFrame, useLoader} from '@react-three/fiber';
 import NormalizeWheel from 'normalize-wheel';
@@ -15,7 +15,8 @@ const Gallery = ({contents, radius, itemClick}) => {
   const touchStartPos = useRef();
 
   // dom manipulation value
-  const rotationY = useRef(0);
+  const gap = useRef(0);
+  const [cardsGap, setCardsGap] = useState(0);
 
   // scroll vars
   const speed = useRef(0);
@@ -31,11 +32,11 @@ const Gallery = ({contents, radius, itemClick}) => {
 
   useFrame(() => {
     if (interactionEnabled) {
-      // set the new rotationY:
-      rotationY.current -= decellerationFactor * speed.current;
+      // set the new gap:
+      gap.current -= decellerationFactor * speed.current;
 
       // move three accordingly
-      gallery.current.rotation.y = rotationY.current;
+      setCardsGap(gap.current);
 
       // decrement the force
       direction.current = (speed.current > 0) ? 'forward' : 'back';
@@ -97,14 +98,14 @@ const Gallery = ({contents, radius, itemClick}) => {
   const renderWorks = () => {
     let baseDegrees = (2 * Math.PI) / contents.length;
     return contents.map((el, i) => {
-      let x = radius * Math.cos(i * baseDegrees);
-      let z = radius * Math.sin(i * baseDegrees);
-      let rot = -(baseDegrees * i + Math.PI / 2);
+      let x = radius * Math.cos(i * baseDegrees + cardsGap);
+      let z = radius * Math.sin(i * baseDegrees + cardsGap);
+      let rot = - ( baseDegrees * i + cardsGap + Math.PI / 2);
       return <Work
         key={`work-${i}`}
         picture={el.picture}
         title={el.title}
-        position={[x, 0, z]}
+        position={[x, 2 , z]}
         initialRotation={[0, rot, 0]}
         slug={el.slug}
         clickHandler={itemClick}
@@ -113,7 +114,7 @@ const Gallery = ({contents, radius, itemClick}) => {
   };
 
   return (
-    <group ref={gallery} position={[0, 1, 0]}>
+    <group ref={gallery} position={[0, 0, 0]} rotation={[0,0, Math.PI / 16]}>
       {renderWorks()}
     </group>
   )
