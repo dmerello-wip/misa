@@ -6,18 +6,18 @@ import Camera from '@/components/Camera';
 import Floor from '@/components/Floor';
 import {useRouter} from 'next/router';
 import gsap, {TweenMax, Power2} from 'gsap';
+import TextMesh from './TextMesh';
 
 const Stage = ({contents, itemClickHandler}) => {
 
   const router = useRouter();
   const cameraRef = useRef(null);
-  const lightRef = useRef(null);
 
 
   const ambientColor = '#000';
   const radius = contents.length / 2.5;
   const cameraPosition = [0, 2, radius + 6];
-  const fogDistance = radius * 2.5;
+  const fogDistance = radius * 3;
 
   const goToWork = (slug) => {
     animateCamera().then(() => {
@@ -63,9 +63,9 @@ const Stage = ({contents, itemClickHandler}) => {
         <color attach="background" args={ambientColor}/>
         <fog attach="fog" args={[ambientColor, 0, fogDistance]}/>
         <Camera position={cameraPosition} ref={cameraRef}/>
-        <ambientLight intensity={1} ref={lightRef}/>
+        <ambientLight intensity={2}/>
         /* also spotlight could be managed with radius relation: */
-        <spotLight intensity={1} position={[0, 10, radius / 2]} angle={2} penumbra={1} castShadow/>
+        <spotLight intensity={1} position={[0, 20, radius/2]} angle={1} penumbra={0} castShadow/>
         <Floor color={ambientColor}/>
         <Suspense fallback={null}>
           <Gallery
@@ -73,6 +73,8 @@ const Stage = ({contents, itemClickHandler}) => {
             radius={radius}
             itemClick={goToWork}
           />
+          <TextMesh position={[-9,2,0]} size={2} height={0} color={'red'} >Liliana</TextMesh>
+          <TextMesh position={[-7,0,0]} size={2} height={0} color={'white'} >Zaccheroni</TextMesh>
         </Suspense>
       </Canvas>
     </div>
