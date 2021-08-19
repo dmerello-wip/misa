@@ -17,7 +17,7 @@ const Stage = ({contents, itemClickHandler}) => {
   const ambientColor = '#000';
   const radius = contents.length / 2.5;
   const cameraPosition = [0, 2, radius + 6];
-  const fogDistance = radius * 3;
+  const fogDistance = radius * 1;
 
   const goToWork = (slug) => {
     animateCamera().then(() => {
@@ -61,9 +61,9 @@ const Stage = ({contents, itemClickHandler}) => {
     <div className="stage">
       <Canvas shadows={true} shadowMap>
         <color attach="background" args={ambientColor}/>
-        <fog attach="fog" args={[ambientColor, 0, fogDistance]}/>
+        <fog attach="fog" args={[ambientColor, 10, 20]}/>
         <Camera position={cameraPosition} ref={cameraRef}/>
-        <ambientLight intensity={2}/>
+        <ambientLight intensity={1}/>
         /* also spotlight could be managed with radius relation: */
         <spotLight intensity={1} position={[0, 20, radius/2]} angle={1} penumbra={0} castShadow/>
         <Floor color={ambientColor}/>
@@ -73,7 +73,7 @@ const Stage = ({contents, itemClickHandler}) => {
             radius={radius}
             itemClick={goToWork}
           />
-          <TextMesh position={[-9,2,0]} size={2} height={0} color={'red'} >Liliana</TextMesh>
+          <TextMesh position={[-9,2.2,0]} size={2} height={0} color={'red'} >Liliana</TextMesh>
           <TextMesh position={[-7,0,0]} size={2} height={0} color={'white'} >Zaccheroni</TextMesh>
         </Suspense>
       </Canvas>
