@@ -14,7 +14,7 @@ const Stage = ({contents, itemClickHandler}) => {
   const cameraRef = useRef(null);
 
 
-  const ambientColor = '#000';
+  const ambientColor = '#141111';
   const radius = contents.length / 2.5;
   const cameraPosition = [0, 2, radius + 6];
   const fogDistance = radius * 1;
@@ -73,8 +73,8 @@ const Stage = ({contents, itemClickHandler}) => {
             radius={radius}
             itemClick={goToWork}
           />
-          <TextMesh position={[-9,2.2,0]} size={2} height={0} color={'red'} >Liliana</TextMesh>
-          <TextMesh position={[-7,0,0]} size={2} height={0} color={'white'} >Zaccheroni</TextMesh>
+          <TextMesh position={[-9,2.2,0]} size={2} height={0} color={'#555'} >Liliana</TextMesh>
+          <TextMesh position={[-7,0,0]} size={2} height={0} color={'#555'} >Zaccheroni</TextMesh>
         </Suspense>
       </Canvas>
     </div>
