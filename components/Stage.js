@@ -1,4 +1,4 @@
-import {Suspense, useRef, useState} from "react";
+import {Suspense, useRef, useEffect} from "react";
 import {Canvas} from "@react-three/fiber";
 import {Box} from "@react-three/drei";
 import Gallery from '@/components/Gallery';
@@ -20,12 +20,12 @@ const Stage = ({contents, itemClickHandler}) => {
   const fogDistance = radius * 1;
 
   const goToWork = (slug) => {
-    animateCamera().then(() => {
+    animateCameraOut().then(() => {
       router.push(`/works/${slug}`);
     });
   };
 
-  const animateCamera = () => new Promise((resolve, reject) => {
+  const animateCameraOut= () => new Promise((resolve, reject) => {
     let cameraChoords = {
       posY: cameraRef.current.position.y,
       posZ: cameraRef.current.position.z,
@@ -55,7 +55,6 @@ const Stage = ({contents, itemClickHandler}) => {
       ease: Power2.easeInOut
     });
   });
-
 
   return (
     <div className="stage">

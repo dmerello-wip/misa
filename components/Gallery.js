@@ -3,9 +3,9 @@ import Work from '@/components/Work';
 import {useFrame, useLoader} from '@react-three/fiber';
 import NormalizeWheel from 'normalize-wheel';
 import gsap, {TweenMax, Expo} from 'gsap';
+import config from '../config';
 
 const Gallery = ({contents, radius, itemClick}) => {
-
 
   const gallery = useRef();
 
@@ -24,7 +24,7 @@ const Gallery = ({contents, radius, itemClick}) => {
 
   // behavioral constants
   const forceDecellerationFactor = 0.9;
-  const decellerationFactor = 0.0001;
+  const forceFactor = 0.0001;
 
   /* -------------------------------------------------- */
   /* request animation frame using ref rotation         */
@@ -33,7 +33,7 @@ const Gallery = ({contents, radius, itemClick}) => {
   useFrame(() => {
     if (interactionEnabled) {
       // set the new gap:
-      gap.current -= decellerationFactor * speed.current;
+      gap.current -= forceFactor * speed.current;
 
       // move three accordingly
       setCardsGap(gap.current);
@@ -82,7 +82,7 @@ const Gallery = ({contents, radius, itemClick}) => {
   useEffect(() => {
     initialAnimation().then(() => {
       interactionEnabled.current = true;
-      let scrollTgtElement = document.querySelector('.stage');
+      let scrollTgtElement = document.querySelector(config.stageSelector);
       scrollTgtElement.addEventListener('mousewheel', onWheel);
       scrollTgtElement.addEventListener('touchstart', onTouchStart);
       scrollTgtElement.addEventListener('touchmove', onTouchMove);
