@@ -72,8 +72,8 @@ const Stage = ({contents, itemClickHandler}) => {
             radius={radius}
             itemClick={goToWork}
           />
-          <TextMesh position={[-9,2.2,0]} size={2} height={0} color={'#555'} >Liliana</TextMesh>
-          <TextMesh position={[-7,0,0]} size={2} height={0} color={'#555'} >Zaccheroni</TextMesh>
+          <TextMesh position={[-9,2.9,0]} size={2.2} height={0} color={'#fff'} >Liliana</TextMesh>
+          <TextMesh position={[-7,0.8,0]} size={2.2} height={0} color={'#fff'} >Zaccheroni</TextMesh>
         </Suspense>
       </Canvas>
     </div>

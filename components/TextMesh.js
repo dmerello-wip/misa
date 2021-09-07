@@ -4,7 +4,7 @@ import { useLoader } from '@react-three/fiber';
 
 
 const TextMesh = ({ children, vAlign = 'center', hAlign = 'center', size = 1, height = 1, color = '#000000', position = [0,0,0] }) => {
-  const font = useLoader(THREE.FontLoader, '/fonts/Bodoni Moda 9pt Medium_Regular.json')
+  const font = useLoader(THREE.FontLoader, '/fonts/Sail_Regular.json')
 
   const config = useMemo(() => ({ font, size: size, height: height }), [font, size, height]);
   const mesh = useRef(null);
@@ -25,6 +25,7 @@ const TextMesh = ({ children, vAlign = 'center', hAlign = 'center', size = 1, he
     <mesh ref={mesh} castShadow receiveShadow position={position}>
       <textGeometry attach="geometry" args={[children, config]} />
       <meshBasicMaterial attach="material" color={color} />
+      {/*<meshStandardMaterial attach="material" color={color} metalness="1" roughness="1"/>*/}
     </mesh>
   )
 }

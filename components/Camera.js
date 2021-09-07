@@ -1,7 +1,7 @@
-import {useRef, forwardRef, useEffect} from "react";
+import {forwardRef} from "react";
 import {PerspectiveCamera, OrbitControls} from '@react-three/drei';
-import {useFrame} from '@react-three/fiber';
-import config from '../config';
+// import {useFrame} from '@react-three/fiber';
+// import config from '../config';
 
 const Camera = ({position}, ref) => {
 
@@ -29,12 +29,12 @@ const Camera = ({position}, ref) => {
   //     scrollTgtElement.addEventListener('mousemove', onMouseMove);
   // }, []);
 
-
-    useFrame((state) => {
-        const t = state.clock.getElapsedTime();
-        ref.current.rotation.y +=  Math.sin(t/2) * 0.0002;
-        ref.current.rotation.x -=  Math.sin(t/2) * 0.0002;
-    });
+    //
+    // useFrame((state) => {
+    //     const t = state.clock.getElapsedTime();
+    //     ref.current.rotation.y +=  Math.sin(t/2) * 0.0002;
+    //     ref.current.rotation.x -=  Math.sin(t/2) * 0.0002;
+    // });
 
     return (
     <>
