@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import React, { useMemo, useEffect, useRef } from 'react'
 import { useLoader } from '@react-three/fiber';
+import { useTexture } from '@react-three/drei'
 
 
 const TextMesh = ({ children, vAlign = 'center', hAlign = 'center', size = 1, height = 1, color = '#000000', position = [0,0,0] }) => {
@@ -8,6 +9,8 @@ const TextMesh = ({ children, vAlign = 'center', hAlign = 'center', size = 1, he
 
   const config = useMemo(() => ({ font, size: size, height: height }), [font, size, height]);
   const mesh = useRef(null);
+  const texture = useTexture('/images/ambientTexture.jpg');
+
     //
     // useEffect(
     //     () => {
@@ -25,7 +28,7 @@ const TextMesh = ({ children, vAlign = 'center', hAlign = 'center', size = 1, he
     <mesh ref={mesh} castShadow receiveShadow position={position}>
       <textGeometry attach="geometry" args={[children, config]} />
       <meshBasicMaterial attach="material" color={color} />
-      {/*<meshStandardMaterial attach="material" color={color} metalness="1" roughness="1"/>*/}
+      {/*<meshPhysicalMaterial envMapIntensity={1} map={texture} clearcoat={0.9} clearcoatRoughness={1} roughness={1} metalness={1} />*/}
     </mesh>
   )
 }
